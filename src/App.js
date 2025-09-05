@@ -32,7 +32,7 @@ function App() {
 
   const retrieveAllJobs = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/jobs');
+      const response = await axios.get(`${process.env.API_URL}/api/jobs`);
       setJobs(response.data)
     } catch (err) {
 
@@ -73,8 +73,8 @@ function App() {
     formData.append("email", form.email)
     formData.append("phone", form.phone)
     formData.append("filename", resume.name)
-    const response = await axios.post("http://localhost:5000/api/jobs/" + show, formData)
-    console.log("first")
+    const response = await axios.post(`${process.env.API_URL}/api/jobs/` + show, formData)
+    console.log(response)
     setForm({
       name: "",
       email: "",
@@ -90,7 +90,7 @@ function App() {
 
   const handleSearch = async () => {
     try{
-      const response = await axios.get('http://localhost:5000/api/jobs', {
+      const response = await axios.get(`${process.env.API_URL}/api/jobs`, {
         params: {
           title: filter.title,
           location: filter.location,
@@ -113,7 +113,7 @@ function App() {
     company
     }
 
-    const response = axios.post("http://localhost:5000/api/add", payload);
+    const response = axios.post(`${process.env.API_URL}/api/add`, payload);
     setJobShow(false);
     setUpdate(prev => !prev)
   }
