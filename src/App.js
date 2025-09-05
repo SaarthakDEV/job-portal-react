@@ -135,7 +135,7 @@ function App() {
       </div>
       <div className="flex gap-20">
         {
-          jobs.map(job => (
+          jobs?.map(job => (
             <Job data={job} setShow={setShow}/>
           ))
         }
