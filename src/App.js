@@ -1,4 +1,3 @@
-
 import './App.css';
 import axios from "axios";
 import { useEffect, useState } from 'react';
@@ -32,7 +31,7 @@ function App() {
 
   const retrieveAllJobs = async () => {
     try {
-      const response = await axios.get(`${process.env.API_URL}/api/jobs`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/jobs`);
       setJobs(response.data)
     } catch (err) {
 
@@ -73,7 +72,7 @@ function App() {
     formData.append("email", form.email)
     formData.append("phone", form.phone)
     formData.append("filename", resume.name)
-    const response = await axios.post(`${process.env.API_URL}/api/jobs/` + show, formData)
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/jobs/` + show, formData)
     console.log(response)
     setForm({
       name: "",
@@ -90,7 +89,7 @@ function App() {
 
   const handleSearch = async () => {
     try{
-      const response = await axios.get(`${process.env.API_URL}/api/jobs`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/jobs`, {
         params: {
           title: filter.title,
           location: filter.location,
@@ -112,13 +111,13 @@ function App() {
     salary,
     company
     }
-
-    const response = axios.post(`${process.env.API_URL}/api/add`, payload);
+    const response = axios.post(`${process.env.REACT_APP_API_URL}/api/add`, payload);
     setJobShow(false);
     setUpdate(prev => !prev)
   }
 
   useEffect(() => {
+    console.log(process.env.REACT_APP_API_URL)
     retrieveAllJobs()
   }, [update])
   return (
